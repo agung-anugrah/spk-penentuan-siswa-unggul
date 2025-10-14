@@ -1,0 +1,19 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Rangking</th>
+      <th scope="col">Nama</th>
+      <th scope="col">Skor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% siswa.forEach((e,i) => { %>
+        <tr>
+          <th scope="row"><%= i+1 %></th>
+          <td><%= e.nama %></td>
+          <td><%= e.skor %></td>
+        </tr>
+    <% }) %>
+  </tbody>
+</table>
+
