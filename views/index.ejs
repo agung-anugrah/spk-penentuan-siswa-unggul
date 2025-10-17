@@ -1,9 +1,10 @@
-<table class="table">
+<table class="table table-striped">
   <thead>
     <tr>
       <th scope="col">Rangking</th>
       <th scope="col">Nama</th>
       <th scope="col">Skor</th>
+      <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
@@ -11,7 +12,8 @@
         <tr>
           <th scope="row"><%= i+1 %></th>
           <td><%= e.nama %></td>
-          <td><%= e.skor %></td>
+          <td><%= skor[i].total_pendek  %></td>
+          <td><a href="/detail/<%= e.nama %>" class="btn btn-info badge">Detail</a></td>
         </tr>
     <% }) %>
   </tbody>

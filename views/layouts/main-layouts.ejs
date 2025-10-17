@@ -7,7 +7,9 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+    <% if (position==='detail') { %>
+      <link rel="stylesheet" href="/css/edit-style.css">
+    <% } %>
     <title>My App</title>
   </head>
   <body>
@@ -29,7 +31,9 @@
                 <%}else if(position==='input') {%>
                     <a href="/" class="text-success text-decoration-none mx-3 fs-5">Home</a>
                     <a href="/config" class="text-success text-decoration-none mx-3 fs-5">Config</a>                        
-                    <p  class="text-primary  mx-3 fs-5 mb-0">Input Data</p>              
+                    <p  class="text-primary  mx-3 fs-5 mb-0">Input Data</p>      
+                <%}else{%>
+
                 <%}%>    
             </div>
           </div>

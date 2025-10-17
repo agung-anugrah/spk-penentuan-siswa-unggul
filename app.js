@@ -1,6 +1,10 @@
 const express = require('express');
 const expressLayout = require('express-ejs-layouts')
-const {siswa,addSiswa} = require('./util/controller.js');
+const {rangkingSiswa} = require('./util/rangking.js');
+const {nilaiSiswa} = require('./util/controller.js')
+const Siswa = require('./model/siswa.js')
+const {ahp} = require('./util/ahp.js');
+const Rangking = require('./model/rangking.js');
 require('./util/db.js')
 
 
@@ -8,41 +12,52 @@ const app = express();
 const port = 3000;
 
 
-// === Tambahkan ini agar bisa baca data form POST ===
 app.use(express.urlencoded({ extended: true }));
-// Jika nanti kamu juga kirim data JSON pakai fetch atau axios:
 app.use(express.json());
+
+// file public
+app.use(express.static('public'))
 
 
 app.set('view engine','ejs');
 app.use(expressLayout);
 
-// localhost
-app.get('/',(req,res)=>{
+
+
+// home page
+app.get('/',async(req,res)=>{
+    const siswa = (await rangkingSiswa()).urutanSiswa;
+    const skor =  await Rangking.find()
     res.render('index',{
         siswa,
         layout:'layouts/main-layouts.ejs',
-        position:'index'
-    })
-});
-// app.get('/config',(req,res)=>{
-//     res.render('config',{
-//         nama:script.rangking,
-//         layout:'layouts/main-layouts.ejs',
-//         position:'config'
-//     })
-// });
-app.get('/input',(req,res)=>{
-    res.render('input',{
-        layout:'layouts/main-layouts.ejs',
-        position:'input'
+        position:'index',
+        skor
     })
 });
 
-app.post('/input/simpan', (req, res) => {
-    addSiswa(req.body)  
-    res.redirect('/')
-  });
+// detail ppage
+app.get(
+    '/detail/:nama',
+    async(req,res)=>{
+        const evaluasiKriteria = await Siswa.findOne({nama:req.params.nama});
+        const faktorPrioritas = await ahp();
+        const jumlahSkorRanking = await Rangking.findOne({nama:req.params.nama});
+        const nilaiSkorSiswa = await nilaiSiswa(req.params.nama); 
+        res.render('detail',{
+                title:'halaman detail',
+                layout:'layouts/main-layouts.ejs',
+                position:'detail',
+                faktorPrioritas,
+                evaluasiKriteria,
+                nilaiSkorSiswa,
+                jumlahSkorRanking
+            },
+        )
+    }
+)
+
+
 
 
 app.use('/',(req,res)=>{

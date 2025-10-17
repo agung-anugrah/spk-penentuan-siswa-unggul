@@ -1,0 +1,42 @@
+<div class="container mt-5">
+    <div class="container-box d-flex flex-column flex-md-row">
+      
+      <!-- Bagian Kiri -->
+      <div class="card-left col-md-3">
+        <img src="https://i.pravatar.cc/120" alt="Foto Siswa">
+        <h3 class="profile-name"><%= evaluasiKriteria.nama %></h3>
+        <div class="info">
+          <p><span><strong>Skor:</strong></span> <span><%= jumlahSkorRanking.total_pendek %></span></p>
+          <p><span><strong>Peringkat:</strong></span> <span><%= jumlahSkorRanking.rangking %></span></p>
+        </div>
+      </div>
+  
+      <!-- Bagian Kanan -->
+      <div class="card-right col-md-9">
+        <h5 class="text-center mb-3">Evaluasi Kriteria</h5>
+        <table class="table table-bordered align-middle">
+          <thead>
+            <tr>
+              <th>Kriteria</th>
+              <th>Evaluasi Kriteria</th>
+              <th>Faktor Prioritas</th>
+              <th>Total Skor</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>NN</td><td><%= evaluasiKriteria.nn %></td><td><%= faktorPrioritas.nn%></td><td><%= nilaiSkorSiswa.nn %></td></tr>
+            <tr><td>NA</td><td><%= evaluasiKriteria.na %></td><td><%= faktorPrioritas.na%></td><td><%= nilaiSkorSiswa.na %></td></tr>
+            <tr><td>NS</td><td><%= evaluasiKriteria.ns %></td><td><%= faktorPrioritas.ns%></td><td><%= nilaiSkorSiswa.ns %></td></tr>
+            <tr><td>ND</td><td><%= evaluasiKriteria.nd %></td><td><%= faktorPrioritas.nd%></td><td><%= nilaiSkorSiswa.nd %></td></tr>
+            <tr><td>NK</td><td><%= evaluasiKriteria.nk %></td><td><%= faktorPrioritas.nk%></td><td><%= nilaiSkorSiswa.nk %></td></tr>
+            <tr><td>NR</td><td><%= evaluasiKriteria.nr %></td><td><%= faktorPrioritas.nr%></td><td><%= nilaiSkorSiswa.nr %></td></tr>
+            <tr class="total-row">
+              <td colspan="3">Jumlah</td>
+              <td><%= jumlahSkorRanking.total %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+    </div>
+  </div>
