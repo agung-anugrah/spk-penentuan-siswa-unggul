@@ -1,6 +1,7 @@
 const express = require('express');
 const expressLayout = require('express-ejs-layouts')
 const {siswa,addSiswa} = require('./util/controller.js');
+require('./util/db.js')
 
 
 const app = express();
@@ -50,5 +51,5 @@ app.use('/',(req,res)=>{
 })
 // listen
 app.listen(port,()=>{
-    console.log(`Example app listening on port ${port}`)
+    console.log(`Example app listening on port : http://localhost:${port}`)
 })

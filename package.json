@@ -3,7 +3,9 @@
     "decimal.js": "^10.6.0",
     "ejs": "^3.1.10",
     "express": "^5.1.0",
-    "express-ejs-layouts": "^2.5.1"
+    "express-ejs-layouts": "^2.5.1",
+    "mongodb": "^6.20.0",
+    "mongoose": "^8.19.1"
   },
   "name": "project-akhir",
   "version": "1.0.0",
