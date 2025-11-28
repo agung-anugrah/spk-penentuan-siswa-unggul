@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-// model schema nilai
+// model schema rangking
 const Rangking = mongoose.model('rangking',{
     nama:{
         type:String,

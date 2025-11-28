@@ -1,0 +1,51 @@
+.range {
+  position: relative;
+  width: 100%;
+  margin: 40px 0 20px;
+}
+
+.range input[type=range] {
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 3px;
+  background: #b2b2b2;
+  outline: none;
+}
+
+/* gaya tombol slider (bola) */
+.range input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #37adbf;
+  cursor: pointer;
+  margin-top: -6px;
+}
+
+/* label angka di bawah slider */
+.range-labels {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  margin-top: 10px;
+  list-style: none;
+}
+
+.range-labels li {
+  position: relative;
+  text-align: center;
+  width: 40px; /* ini yang mengatur lebar angka */
+  font-size: 14px;
+  color: #999;
+  cursor: pointer;
+}
+
+/* label aktif atau yang dipilih */
+.range-labels li.active {
+  color: #37adbf;
+  font-weight: bold;
+}

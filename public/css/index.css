@@ -1,0 +1,7 @@
+body{
+    background-color: black;
+}
+.carousel-item ul{
+  text-align: center;
+  list-style: none;
+}

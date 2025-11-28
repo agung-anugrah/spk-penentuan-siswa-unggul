@@ -1,8 +1,7 @@
-const Rangking = require('../model/rangking');
-const {rangkingSiswa} = require('./rangking');
+const {loadNilaiSiswaAhp} = require('./rangking');
 
 async function nilaiSiswa(nama){
-    const nilai = (await rangkingSiswa()).nilaiSiswaAhp;
+    const nilai = await loadNilaiSiswaAhp();
     const nilaiSiswa = nilai.find(a => a.nama === nama);
     return nilaiSiswa
 }

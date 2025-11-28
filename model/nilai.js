@@ -29,6 +29,10 @@ const Nilai = mongoose.model('nilai',{
         type:Number,
         require:true,
     },
+    Nama_Kriteria:{
+        type:String,
+        require:true,
+    },
 },'nilai')
 
 module.exports = Nilai

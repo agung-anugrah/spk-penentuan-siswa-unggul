@@ -1,4 +1,4 @@
-const {ahp} = require('./ahp.js')
+const {loadNilaiRataEigen} = require('./ahp.js')
 require('./db.js')
 const Siswa = require('../model/siswa.js')
 const Rangking = require('../model/rangking.js')
@@ -52,20 +52,38 @@ async function dbRangking(data){
 }
 
 
+// mengambil nilai siswa di dalam db
+async function loadNilaiSiswa(){
+    const nilai = await Siswa.find();
+    return nilai;
+};
 
-async function rangkingSiswa(){
-    const nilaiAhp = await ahp()
-    const nilaiSiswa = await Siswa.find()
-    const nilaiSiswaAhp = siswaAhp(nilaiAhp,nilaiSiswa)
-    const nilaiTotalSiswa = totalSiswa(nilaiSiswaAhp)
-    const urutanSiswa = rangking(nilaiTotalSiswa)
-    await dbRangking(urutanSiswa)
-    return {urutanSiswa,nilaiTotalSiswa,nilaiSiswaAhp}
+// mengambil nilai siswa yang telah dikalikan dengan ahp
+async function loadNilaiSiswaAhp(){
+    const nilaiSiswa = await loadNilaiSiswa();
+    const nilaiAhp = await loadNilaiRataEigen();
+    const nilai = siswaAhp(nilaiAhp,nilaiSiswa);
+    return nilai
+};
+
+// mengambil total nilai siswa yang telah dikalikan dengan ahp
+async function loadNilaiTotalSiswa(){
+    const nilaiSiswaAhp = await loadNilaiSiswaAhp();
+    const nilai = totalSiswa(nilaiSiswaAhp);
+    return nilai;
+};
+
+// mengurutkan nilai siswa
+async function loadUrutanSiswa (){
+    const nilaiTotalSiswa = await loadNilaiTotalSiswa();
+    const nilai = rangking(nilaiTotalSiswa);
+    await dbRangking(nilai);
+    return nilai;
 }
 
-
 module.exports = {
-    rangkingSiswa
+    loadNilaiSiswaAhp,
+    loadUrutanSiswa
 }
 
 

@@ -51,7 +51,7 @@
   border-radius: 50%;
   object-fit: cover;
   margin-bottom: 8px;
-  margin-top: -10px; /* untuk menaikkan foto sedikit */
+  margin-top: -10px; 
 }
 
 .profile-name {
@@ -101,7 +101,7 @@ tr:last-child td {
     
     .info {
       width: 100%;
-      margin-top: 30px; /* posisi tulisan agak ke bawah */
+      margin-top: 30px; 
     }
 
     .info p {

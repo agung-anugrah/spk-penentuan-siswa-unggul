@@ -1,0 +1,92 @@
+<div class="col col-md-6">
+  <div class="row">
+    <form action="/config/add" method="post">
+      <div class="mb-3">
+        <label for="namaKriteria" class="form-label">Nama Kriteria</label>
+        <input type="text" class="form-control" id="namaKriteria" name="nama_kriteria" placeholder="Masukkan nama kriteria">
+      </div>
+      <div class="mb-3">
+        <label for="kodeKriteria" class="form-label">Kode Kriteria</label>
+        <input type="text" class="form-control" id="kodeKriteria" name="kode_kriteria" placeholder="Masukkan kode kriteria">
+      </div>
+
+      <!-- input range -->
+      <% nilai.forEach(e => { %>
+        <div class="range">
+          <div class="d-flex justify-content-between">
+            <!-- Label kiri diganti otomatis -->
+            <label class="label-nama-kriteria"></label>
+            <label><%= e.Nama_Kriteria %></label>
+          </div>
+          <input type="range" min="-5" max="5" step="1" value="0" name="range">
+        </div>
+        <ul class="range-labels">
+          <li>5</li>
+          <li>4</li>
+          <li>3</li>
+          <li>2</li>
+          <li>1</li>
+          <li>0</li>
+          <li>1</li>
+          <li>2</li>
+          <li>3</li>
+          <li>4</li>
+          <li>5</li>
+        </ul>
+      <% }) %>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+  var sheet = document.createElement('style'),
+      $rangeInput = $('.range input'),
+      prefs = ['webkit-slider-runnable-track', 'moz-range-track', 'ms-track'];
+
+  document.body.appendChild(sheet);
+
+  function getTrackStyle(el) {  
+    var $thisRange = $(el);
+    var $rangeGroup = $thisRange.closest('.range');
+    var $labels = $rangeGroup.next('.range-labels');
+
+    var min = parseInt(el.min),
+        max = parseInt(el.max),
+        curVal = parseInt(el.value),
+        range = max - min,
+        val = ((curVal - min) / range) * 100;
+
+    $labels.find('li').removeClass('active selected');
+    var labelIndex = curVal - min + 1;
+    var curLabel = $labels.find('li:nth-child(' + labelIndex + ')');
+    curLabel.addClass('active selected');
+    curLabel.prevAll().addClass('selected');
+  }
+
+  $rangeInput.on('input', function () {
+    sheet.textContent = getTrackStyle(this);
+  });
+
+  $('.range-labels li').on('click', function () {
+    var $thisLabel = $(this);
+    var $labels = $thisLabel.closest('.range-labels');
+    var $range = $labels.prev('.range').find('input');
+    var index = $thisLabel.index();
+    var min = parseInt($range.attr('min'));
+    $range.val(min + index).trigger('input');
+  });
+
+  $rangeInput.each(function() {
+    $(this).trigger('input');
+  });
+
+  // 🔥 Update nama kriteria secara real-time
+  $('#namaKriteria').on('input', function() {
+    const nama = $(this).val().trim() || ''; // jika kosong, tetap "nama kriteria"
+    $('.label-nama-kriteria').text(nama);
+  });
+</script>

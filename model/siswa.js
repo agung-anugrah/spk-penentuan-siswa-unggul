@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-// model schema nilai
+// model schema siswa
 const Siswa = mongoose.model('siswa',{
     nama:{
         type:String,

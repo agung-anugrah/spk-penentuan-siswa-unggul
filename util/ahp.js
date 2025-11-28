@@ -68,17 +68,69 @@ function rataEigen(nilaJumlahEigen){
     
 }
 
-async function ahp(){
-    const data = await Nilai.find()
-    const nilaiTotal = jumlahNilai(data)
-    const nilaiEigen = Eigen(data,nilaiTotal)
-    const nilaJumlahEigen = jumlahEigen(nilaiEigen)
-    const nilaiRataEigen = rataEigen(nilaJumlahEigen)
 
-    return nilaiRataEigen
+// mengambil nilai dari db
+async function loadNilai(){
+    const nilai = await Nilai.find()
+    return nilai
+}
+
+// menjulamlah kan semua nilai
+async function loadNilaiTotal(){
+    const data = await loadNilai()
+    const nilai = jumlahNilai(data)
+    return nilai
 }
 
 
+// mengambil nilai eigen
+async function loadNilaiEigen(){
+    const data = await loadNilai()
+    const nilaiTotal = await loadNilaiTotal()
+    const nilai = Eigen(data,nilaiTotal)
+    return nilai
+}
+
+// mengambil nilai jumlah eigen
+async function loadNilaiJumlahEigen(){
+    const nilaiEigen = await loadNilaiEigen();
+    const nilai = jumlahEigen(nilaiEigen);
+    return nilai;
+}
+
+// mengambil nilai rata-rata eigen
+async function loadNilaiRataEigen(){
+    const nilaiJumlahEigen = await loadNilaiJumlahEigen();
+    const nilai = rataEigen(nilaiJumlahEigen);
+    return nilai
+}
+
+// mengambil nilai jumlah dan rata-rata
+async function nilaiJumlahRataEigen(){
+    const nilaiEigen = await loadNilaiEigen();
+    const jumlahEigen = await loadNilaiJumlahEigen();
+    const rataEigen = await loadNilaiRataEigen();
+    const nilaiGabungan = [
+
+    ]
+    nilaiEigen.forEach(e=>{
+        const nilai = {
+            key:e.key,
+            nn:Number(e.nn.toFixed(3)),
+            na:Number(e.na.toFixed(3)),
+            ns:Number(e.ns.toFixed(3)),
+            nd:Number(e.nd.toFixed(3)),
+            nk:Number(e.nk.toFixed(3)),
+            nr:Number(e.nr.toFixed(3)),
+            jumlah:Number(jumlahEigen[e.key].toFixed(3)),
+            rata:Number(rataEigen[e.key].toFixed(3))
+        }
+        nilaiGabungan.push(nilai)
+    })
+    return nilaiGabungan
+}
+
 module.exports={
-    ahp
+    loadNilaiRataEigen,    
+    nilaiJumlahRataEigen
 }
